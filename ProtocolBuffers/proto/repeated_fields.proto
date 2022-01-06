@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message person{
+int32 age = 1;
+string firstname = 2;
+string lastname = 3;
+bytes image = 4;
+bool profile_verified = 5;
+float height = 6;
+repeated string phone_no = 7;
+}

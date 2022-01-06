@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+message person {
+  int32 age = 1;
+  string firstname = 2;
+  string lastname = 3;
+  bytes image = 4;
+  bool profile_verified = 5;
+  float height = 6;
+  repeated string phone_no = 7;
+
+  //currently considering only 3 eye colors
+  enum Eyecolor {
+    UNKNOWN_COLOR = 0;
+    GREEN = 1;
+    BROWN = 2;
+    BLUE = 3;
+  }
+
+  Eyecolor eye_color = 8;
+  Date birthday = 9;
+}
+
+message Date{
+  int32 year = 1;
+  int32 month = 2;
+  int32 day = 3;
+}
