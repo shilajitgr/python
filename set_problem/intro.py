@@ -41,10 +41,12 @@ The second line contains the N space-separated integers, arr[i].
 
 """
 
+
 def average(array):
     # your code goes here
     num = sum(set(array))
-    return num/float(len(set(array)))
+    return num / float(len(set(array)))
+
 
 if __name__ == '__main__':
     n = int(input())
