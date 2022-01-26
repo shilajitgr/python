@@ -20,6 +20,6 @@ Sample Output 0
 
 import re
 
-regex_pattern = r"[,]|[\.]"
+regex_pattern = r",|\."
 
 print("\n".join(re.split(regex_pattern, input())))

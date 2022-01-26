@@ -6,6 +6,7 @@ Code
 # >>> import re
 # >>> re.findall(r'\w','http://www.hackerrank.com/')
 ['h', 't', 't', 'p', 'w', 'w', 'w', 'h', 'a', 'c', 'k', 'e', 'r', 'r', 'a', 'n', 'k', 'c', 'o', 'm']
+
 re.finditer()
 The expression re.finditer() returns an iterator yielding MatchObject instances over all non-overlapping matches for the re pattern in the string.
 Code
@@ -17,7 +18,7 @@ Code
 ['h', 't', 't', 'p', 'w', 'w', 'w', 'h', 'a', 'c', 'k', 'e', 'r', 'r', 'a', 'n', 'k', 'c', 'o', 'm']
 Task
 You are given a string . It consists of alphanumeric characters, spaces and symbols(+,-).
-Your task is to find all the substrings of  that contains  or more vowels.
+Your task is to find all the substrings of  that contains 1 or more vowels.
 Also, these substrings must lie in between  consonants and should contain vowels only.
 
 Note :
