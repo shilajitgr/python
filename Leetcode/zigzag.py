@@ -3,7 +3,7 @@ class Solution:
         if numRows == 1 or len(s) == 1:
             return s
 
-        zig_matrix = [['']*(len(s)//2) for i in range(numRows)]
+        zig_matrix = [['']*(len(s)//2+1) for i in range(numRows+1)]
         keep_column_same = []
 
         skip = False
@@ -44,6 +44,3 @@ class Solution:
         for i in range(numRows):
             final += "".join(zig_matrix[i][:])
         return final
-
-
-print(Solution().convert("ABC", 2))
