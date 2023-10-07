@@ -1,6 +1,6 @@
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        if numRows == 1 or len(s) == 1:
+        if numRows == 1 or len(s) == 1 or len(s) == numRows:
             return s
 
         zig_matrix = [['']*(len(s)//2+1) for i in range(numRows+1)]
@@ -35,12 +35,18 @@ class Solution:
                 break
             id += 1
             for id in range(id, id + numRows - 2):
+                if id >= len(s):
+                    stop = True
+                    continue
                 row -= 1
                 zig_matrix[row][col] = s[id]
                 col += 1
+            if stop:
+                break
 
-        # print(*zig_matrix, sep='\n')
         final = ""
-        for i in range(numRows):
-            final += "".join(zig_matrix[i][:])
+        for line in zig_matrix:
+            final += "".join(line)
         return final
+
+print(Solution().convert("PAYPALISHIRING", 3) == "PAHNAPLSIIGYIR")
