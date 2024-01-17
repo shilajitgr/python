@@ -49,7 +49,42 @@ class heap: # for max heap
         self.sorted = []
 
     def heapify(self):
-        pass
+        """
+        Heapify (creating max heap) - Pass through any array(representing a complete binary tree) from
+        right to left and keep comparing with its max child, three scenarios might occur here:
+        1. No children - Keep the node as it is
+        2. Children are smaller than the node -  Keep the node as it is
+        3. Children is larger than the node - Swap the values of the largest child and the node
+        PS - The leaf nodes of the tree need no adjusting as they don't have any children.
+        """
+        self.heap = self.arr.copy()
+        heap_len = len(self.heap)
+        for idx in range(len(self.heap)-1, -1, -1):
+            
+            parent = idx
+            adjust = True
+
+            self.heap_adjust(adjust, parent, heap_len)
+            # while adjust:
+            #     children_base = 2*(parent+1) - 1
+            #     if children_base >= heap_len:
+            #         adjust = False
+            #         continue
+
+            #     max_child = children_base
+            #     if max_child + 1 < heap_len:
+            #         if self.heap[max_child+1] > self.heap[max_child]:
+            #             max_child += 1
+                
+            #     adjust = False
+            #     if self.heap[max_child] > self.heap[parent]:
+            #         temp = self.heap[parent]
+            #         self.heap[parent] = self.heap[max_child]
+            #         self.heap[max_child] = temp
+            #         adjust = True
+            #         parent = max_child
+                    
+
 
     # def adjust(self, i):
 
@@ -69,34 +104,39 @@ class heap: # for max heap
                     adjust = False
 
     def extract(self):
-        for i in range(len(self.heap)):
-            temp = self.heap[i]
-            self.heap[i] = self.heap[-(i+1)]
+        for i in range(len(self.heap)-1, -1, -1):
 
-            self.heap[-(i+1)] = temp
-
+            parent = 0
+            temp = self.heap[parent]
+            self.heap[parent] = self.heap[i]
+            self.heap[i] = temp
             adjust = True
-            parent = i
+            heap_len = i
+
+            self.heap_adjust(adjust, parent, heap_len)
+
+    def heap_adjust(self, adjust, parent, heap_len):
+
+        while adjust:
             children_base = 2*(parent+1) - 1
-            heap_len = len(self.heap) - (i+1)
-            while adjust and children_base < heap_len:
+            if children_base >= heap_len:
+                adjust = False
+                continue
 
-                max_adr = children_base
-                if children_base + 1 < heap_len:
-
-                    max_adr = children_base + 1
-                    if self.heap[max_adr] < self.heap[children_base]:
-                        max_adr = children_base
+            max_child = children_base
+            if max_child + 1 < heap_len:
+                if self.heap[max_child+1] > self.heap[max_child]:
+                    max_child += 1
+            
+            adjust = False
+            if self.heap[max_child] > self.heap[parent]:
+                temp = self.heap[parent]
+                self.heap[parent] = self.heap[max_child]
+                self.heap[max_child] = temp
+                parent = max_child
+                children_base = 2*(parent+1) - 1
+                adjust = True
                 
-
-                if self.heap[max_adr] > self.heap[parent]:
-                    temp = self.heap[parent]
-                    self.heap[parent] = self.heap[max_adr]
-                    self.heap[max_adr] = temp
-                    parent = max_adr
-                    children_base = 2*(parent+1) - 1
-                else:
-                    adjust = False
 
     def sort(self):
 
@@ -109,7 +149,16 @@ class heap: # for max heap
 
 
 # heap_obj = heap([1,4,2,4,6,2,4,8,6], True)
-heap_obj = heap([1,4,6,2,8], True)
+num_list = [113,43231,122,243,663,1122,33,1242423,123134,111]
+heap_obj = heap(num_list, True)
 heap_obj.sort()
-print(heap_obj.heap)
+print(heap_obj.heap, end="\n")
+
+heap_obj = heap(num_list, False)
+heap_obj.sort()
+print(heap_obj.heap, end="\n")
+
+num_list.sort()
+print(num_list)
+
 # print(heap_obj.sorted)
