@@ -82,3 +82,14 @@ incremented.
 Then finally, "print_result()" is called to print the output in the required format.
 
 
+Conclusion:
+
+This solution has been written keeping in mind:
+
+1) Scalability - Hence the reading is performed line by line
+2) Performace - Hence the time complexity of the solution is O(n).
+3) Separation of Responsibilities principle - Hence grouping the set of Responsibilities into two classes -
+
+                                              CheckInput - which reads and verifies the commandline argument
+                                              SummarizeInput - which operates on the data present in the log file
+
