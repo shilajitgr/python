@@ -1,3 +1,4 @@
+import random
 
 def get_digit(val, digit_num, max_digit):
     """
@@ -41,12 +42,24 @@ def populate_sorted_arr(arr, base, digit_num, max_digit):
 
 def radix_sort(arr, base):
 
-    max_digit = len(str(max(arr)))
+    max_digit = len(str(max(arr)))  # getting max number of digits for any val in arr
     sorted = arr.copy()
-    for i in range(max_digit-1, -1 , -1):
-        sorted = populate_sorted_arr(sorted, base, i, max_digit)
+    final = []
+    next = sorted[:]
+    for idx in range(max_digit-1, -1 , -1):
+        sorted = populate_sorted_arr(sorted, base, idx, max_digit)
+        # next_base = base ** (max_digit - idx)
+        # next = []
+        # for data in sorted:
+        #     if data < next_base:
+        #         final.append(data)
+        #     else:
+        #         next.append(data)
+        # sorted = next[:]
+                
 
     return sorted
 
-num_list = [330, 554, 22, 4223, 114, 421, 1354, 2, 53235, 311]
+# num_list = [330, 554, 22, 4223, 114, 421, 1354, 2, 53235, 311]
+num_list = random.sample(range(0, 1000000000), 10000)
 print(radix_sort(num_list, base=10))

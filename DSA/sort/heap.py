@@ -97,19 +97,20 @@ class heap: # for max heap
                 child = parent
                 parent = math.floor((child-1)/2)
                 if self.heap[child] > self.heap[parent]:
-                    temp = self.heap[child]
-                    self.heap[child] = self.heap[parent]
-                    self.heap[parent] = temp
+                    self.heap[child], self.heap[parent] = self.heap[parent], self.heap[child]
                 else:
                     adjust = False
 
     def extract(self):
-        for i in range(len(self.heap)-1, -1, -1):
+        for i in range(len(self.heap)-1, -1, -1): 
+            """ 
+            max val is extracted from the root and pushed to the last index of the current max length, then the heap is re-adjusted.
+            Therefore, a min heap will result in an array sorted in descending order
+            and a max heap will result in an array sorted in descending order
+            """
 
             parent = 0
-            temp = self.heap[parent]
-            self.heap[parent] = self.heap[i]
-            self.heap[i] = temp
+            self.heap[parent], self.heap[i] = self.heap[i], self.heap[parent]
             adjust = True
             heap_len = i
 
@@ -130,9 +131,7 @@ class heap: # for max heap
             
             adjust = False
             if self.heap[max_child] > self.heap[parent]:
-                temp = self.heap[parent]
-                self.heap[parent] = self.heap[max_child]
-                self.heap[max_child] = temp
+                self.heap[max_child], self.heap[parent] = self.heap[parent], self.heap[max_child]
                 parent = max_child
                 children_base = 2*(parent+1) - 1
                 adjust = True

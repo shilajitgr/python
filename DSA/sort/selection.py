@@ -5,8 +5,7 @@ for i in range(len(arr)):
     min_idx = i + arr[i:].index(min(arr[i:]))
     if min_idx == i:
         continue
-    temp = arr[min_idx]
-    arr[min_idx] = arr[i]
-    arr[i] = temp
+    
+    arr[min_idx], arr[i] = arr[i], arr[min_idx]
 
 print(arr)
