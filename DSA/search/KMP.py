@@ -9,9 +9,9 @@ def get_lps_arr() -> list:
     lps = [0] * str2_len
     while i < str2_len:
         if str2[i] == str2[length]:
-            lps[i] = length+1
             i += 1
             length += 1
+            lps[i] = length
         elif length > 0:
             length = lps[length - 1]
         else:
@@ -43,4 +43,6 @@ def str_match() -> bool:
 
 
 print(str_match())
+# print(*list(str2), sep="\t")
+# print(*get_lps_arr(), sep="\t")
 
