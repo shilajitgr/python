@@ -66,6 +66,22 @@ class Solution:
                 
         return profit
     
+    def optimal(self, nums: list) -> int:
+        max_val = -1
+        num_len = len(nums)
+
+        start = 0
+        cnt = 1
+        for i in range(1, len(nums)):
+            if nums[i] - nums[start] > max_val:
+                max_val = nums[i] - nums[start]
+                
+            if nums[i] <= nums[start]:
+                start = i
+                cnt += 1
+
+        return 0 if cnt == num_len else max_val
+
     
 sol_obj = Solution()
 nums = [7,1,5,3,6,4] # [0,-6,4,-2,3,-2]
