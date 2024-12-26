@@ -3,39 +3,28 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        breakpoint = None
         last = len(nums) - 1
+        breakpoint = -1
+
+        # Find the first decreasing element from the end
         for i in range(last, 0, -1):
-            # 1 241 42 52 6 3 2 0
-            if nums[i] > nums[i-1]:
+            if nums[i] > nums[i - 1]:
                 breakpoint = i - 1
                 break
-            # 52 is breakpoint 
 
-        if breakpoint == None: # this will happen only if the array is sorted in descending order
+        if breakpoint == -1:  # If no breakpoint is found, reverse the entire list
             nums.reverse()
             return
 
-        if len(nums[breakpoint+1:]) == 1: # if only one element is present to the right of breakpoint
-        
-            nums[breakpoint], nums[last] = nums[last], nums[breakpoint]
-            return
+        # Find the idx of smallest element larger than nums[breakpoint] to the right of it
+        i = last
+        while nums[i] <= nums[breakpoint]:
+                i -= 1
 
-        #find lower value closest to nums[breakpoint] to its right in the list
-        min = max(nums)
-        idx = None
-        for x in range(len(nums[breakpoint+1:])):
-            if 0 < nums[breakpoint+1+x] - nums[breakpoint] <= min:
-                min = nums[breakpoint+1+x] - nums[breakpoint]
-                idx = breakpoint+1+x
-        # here nums[idx] points to 6
-        nums[breakpoint], nums[idx] = nums[idx], nums[breakpoint]
-        # nums = 1 241 42 6 52 3 2 0
-        sublist = nums[breakpoint+1:]
-        sublist.reverse()
-        # sublist = 0 2 3 52
-        nums[breakpoint+1:] = sublist
-        # nums = 1 241 42 6 0 3 2 52
+        nums[breakpoint], nums[i] = nums[i], nums[breakpoint]
+
+        # Reverse the elements to the right of the breakpoint
+        nums[breakpoint + 1:] = reversed(nums[breakpoint + 1:])
         
 sol_obj = Solution()
 nums = [1,3,2]
