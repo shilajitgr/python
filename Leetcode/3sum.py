@@ -1,33 +1,24 @@
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
-        nums.sort()
         num_len = len(nums)
-        if num_len == 3:
-            return [] if sum(nums) != 0 else [nums]
-
-        zero_list = []
-        item_hash = {}
+        final = set()
+        index_tracker = set()
         
-        for x in range(num_len-2):
-            i = x + 1
-            j = num_len - 1
-            target = -1 * nums[x]
+        for idx in range(num_len):
+            new_target = 0 - nums[idx]
 
-            while i < j:
-                sum_data = nums[i] + nums[j]
-                if sum_data > target:
-                    j -= 1
-                elif sum_data < target:
-                    i += 1
-                else:
-                    temp = [nums[x], nums[i], nums[j]]
-                    i += 1
-                    j -= 1
-                    if f"{temp}" not in item_hash:
-                        zero_list.append(temp)
-                        item_hash[f"{temp}"] = ""
-                
-        return zero_list
+            seen = {}
+            # seen.add(nums[idx])
+            for new_idx in range(idx+1, num_len):
+                temp = tuple(sorted([idx, seen.get(new_target - nums[new_idx],0), new_idx]))
+                if new_target - nums[new_idx] in seen and temp not in index_tracker :
+                    final.add(tuple(sorted([nums[temp[0]], nums[temp[1]] ,nums[temp[2]]])))
+                    index_tracker.add(temp)
 
+                seen[nums[new_idx]] = new_idx
+
+        return [list(x) for x in final]
+    
 simple = [3,0,-2,-1,1,2]
+simple = [-1,0,1,2,-1,-4]
 print(Solution().threeSum(simple))

@@ -26,30 +26,30 @@ class Solution:
     def count_pair(self, left: list[int], right: list[int]) -> int:
         count = 0
         j = 0
-        # if right[0] > left[0]:
-        #     left, right = right, left
         for left_num in left:
-            target_val = left_num/2
             while j < len(right):
-                if right[j] < target_val:
-                    j+=1
-                else:
+
+                if (right[j]+right[j]) >= left_num:
                     break
+
+                j+=1
+
             count += j
         return count
 
     def merge_count(self, nums: list[int]) -> tuple[int, list[int]]:
         count = 0
-        mid = len(nums)//2
+        
         if len(nums) < 2:
             return nums, count
-        else:
-            left_arr, left_count = self.merge_count(nums[:mid])
-            right_arr, right_count = self.merge_count(nums[mid:])
-            count = self.count_pair(left_arr, right_arr) + left_count + right_count
-            result = self.merge(left_arr, right_arr) 
-            return result, count
+
+        mid = len(nums)//2
         
+        left_arr, left_count = self.merge_count(nums[:mid])
+        right_arr, right_count = self.merge_count(nums[mid:])
+        count = self.count_pair(left_arr, right_arr) + left_count + right_count
+        result = self.merge(left_arr, right_arr) 
+        return result, count
 
     def reversePairs(self, nums: list[int]) -> int:
         

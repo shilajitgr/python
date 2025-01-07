@@ -1,15 +1,18 @@
 class Solution:
+    # optimal
+    # using prefix sum
     def subarraySum(self, nums: list[int], k: int) -> int:
         num_len = len(nums)
         subArr = 0
-        for windowSize in range(1,num_len):
-            window = sum(nums[:windowSize])
-            if window == k:
-                subArr += 1
-            for idx in range(num_len-windowSize):
-                window = window - nums[idx] + nums[windowSize+idx]
-                if window == k:
-                    subArr += 1
+            
+        remember = {}
+        remember[0] = 1
+        prefix = 0
+        for idx in range(num_len):
+            prefix += nums[idx]
+            if prefix - k in remember:
+                subArr += remember[prefix - k]
+            remember[prefix] = remember.setdefault(prefix,0) + 1
                     
         return subArr
                 
