@@ -17,15 +17,37 @@ print(tim.poor)
 tim.score = 500
 print(tim)
 
-from enemy import Enemy
-random_monster = Enemy("Basic enemy", 12, 1)
-print(random_monster)
-random_monster.takeDamage(4)
-print(random_monster)
+from enemy import Enemy, Troll, Vampyre
 
-random_monster.takeDamage(9)
-print(random_monster)
+# random_monster = Enemy("Basic enemy", 12, 1)
+# print(random_monster)
+# random_monster.takeDamage(4)
+# print(random_monster)
 
+# random_monster.takeDamage(9)
+# print(random_monster)
+ugly_troll = Troll("Pug")
+print("ugly troll - {}".format(ugly_troll))
+
+another_troll = Troll("Ug", 18, 1)
+print("Another troll - {}".format(another_troll))
+
+brother = Troll("Urg", 23)
+print(brother)
+
+print(end="\n\n\n")
+ugly_troll.grunt()
+another_troll.grunt()
+brother.grunt()
+
+print(end="\n\n\n")
+ugly_troll.takeDamage(4)
+print(ugly_troll)
+bad_vamp = Vampyre("Evil")
+bad_vamp.takeDamage(7)
+print(bad_vamp)
+while bad_vamp.alive:
+    bad_vamp.takeDamage(1)
 """
 Now, if you change the accessibility of lives data member to public, and run this code, it crash.
 This is the result of self call by _lives_set() because now, lives data member being set by 
