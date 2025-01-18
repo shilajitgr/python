@@ -1,7 +1,4 @@
 class Solution:
-    #User function Template for python3
-    
-    #Complete this function
     def findFloor(self,nums,target):    
         
         # the same code can be used to tell the Insert Position of an a new item into a sorted array
