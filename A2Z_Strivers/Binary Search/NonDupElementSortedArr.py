@@ -3,9 +3,11 @@ class Solution:
         # a list of sorted pair of duplicate elements will occupy indices
         # in the order (even, odd) but after encountering the non-dup element
         # the order will be altered to (odd, even)
-        #  0 1  2  3 4  5 6  7 8
-        # (e o)(e)(o e)(o e)(o e)
-        #  1 1  2  3 3  4 4  8 8
+        
+        #  0 1  2  3 4  5 6  7 8  -> indices
+        # (e o)(e)(o e)(o e)(o e) -> odd even designation
+        #  1 1  2  3 3  4 4  8 8  -> elements of the array
+        
         num_len = len(nums)
         high = num_len - 1
         low = 0
@@ -19,20 +21,22 @@ class Solution:
             if mid == 0 or mid == num_len - 1:
                 return nums[mid]
             
-            if mid%2 == 0:
-                if nums[mid] == nums[mid+1]:
+            if nums[mid] == nums[mid+1]:
+                
+                if mid%2 == 0:
                     low = mid + 1
-                elif nums[mid] == nums[mid-1]:
+                else:
+                    high = mid - 1
+                    
+            elif nums[mid] == nums[mid-1]:
+                
+                if mid%2 == 0:
                     high = mid - 1
                 else:
-                    return nums[mid]
-            else:
-                if nums[mid] == nums[mid-1]:
                     low = mid+1
-                elif nums[mid] == nums[mid+1]:
-                    high = mid - 1
-                else:
-                    return nums[mid]
+                    
+            else:
+                return nums[mid]
                 
     
 arr = [1,1,2,3,3,4,4,8,8]
