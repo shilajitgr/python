@@ -84,9 +84,17 @@ class Solution:
             if nums[mid] == target:
                 return mid
             
-            if arr[low] <= arr[mid]:    # to check if low to mid is sorted mid to high
+            if nums[mid] == nums[low] == nums[high]:
+                # since the sorted array has duplicates, it can be like [1,0,1,1,1], in this case
+                # mid, low, and high will be pointing to same values now since target is not equal to mid,
+                # it will not be equal to low, high, so we move these two pointers towards mid
+                low += 1
+                high -= 1
+                continue
+            
+            if nums[low] <= nums[mid]:    # to check if low to mid is sorted mid to high
                 
-                if arr[low] <= target < arr[mid]:
+                if nums[low] <= target < nums[mid]:
                     # if low to mid is sorted, then arr[low] will always be <= arr[mid]
                     # and if targets falls between two values then 
                     # high can be updated to mid - 1
@@ -96,7 +104,7 @@ class Solution:
                     
             else:
                 
-                if arr[mid] < target <= arr[high]:
+                if nums[mid] < target <= nums[high]:
                     low = mid + 1
                 else:
                     high = mid - 1
@@ -109,5 +117,6 @@ class Solution:
 # arr, target = [1,2,4,6,7,8,1], 1
 arr, target = [3,3,4,5,1,2,3], 2    # invalid test case, all nums to be unique
 # arr, target = [4,5,1,2,3], 1
-print(arr[Solution().search(arr, target)]==target)
+arr, target = [1,0,1,1,1], 0
+# print(arr[Solution().search(arr, target)]==target)
 print(arr[Solution().searchSortedApt(arr, target)]==target)
